@@ -104,7 +104,7 @@
   z-index: 10;
 }
 
-.rightColumn > div {
+/* .rightColumn > div {
   position: absolute;
   inset: 0;
   z-index: 0;
@@ -113,6 +113,11 @@
   background-position: center;
   scale: 1.2;
 
-  /* filter: blur(4px);
-  opacity: 0.5; */
+  filter: blur(4px);
+  opacity: 0.5;
+} */
+
+
+.imageContainerNatural {
+
 }
