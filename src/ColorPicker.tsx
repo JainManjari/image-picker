@@ -15,8 +15,20 @@ const ColorPicker: React.FC<IColorPickerProps> = () => {
 
   return (
     <div className={styles.wrapper}>
-      Color Picker
-      <div className={styles.leftColumn}></div>
+      <div className={styles.leftColumn}>
+        <h1 className={styles.headingText}>Pick color for image</h1>
+        <div className={styles.formSection}>
+          <p>1. Select an image</p>
+          <input onChange={handleFileInput} type="file" accept="image/*" />
+        </div>
+
+        <div className={styles.formSection}>
+          <p>2. Pick color </p>
+          <button className={styles.openPickerButton} onClick={openEyeDropper}>
+            Open Eyedropper
+          </button>
+        </div>
+      </div>
       <div className={styles.rightColumn}></div>
     </div>
   );
