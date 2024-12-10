@@ -9,7 +9,9 @@ const ColorPicker: React.FC<IColorPickerProps> = () => {
   const [openEyeDropper, setOpenEyeDropper] = useState<boolean>(false);
   const [image, setImage] = useState<string | null>(null);
 
-  const handleFileInput = (e: any) => {};
+  const handleFileInput = (e: any) => {
+    setImage(URL.createObjectURL(e.target.files[0]));
+  };
 
   const handleChangeColor = ({ rgb, hex }: OnChangeEyedrop) => {
     setColor(hex);
@@ -36,6 +38,9 @@ const ColorPicker: React.FC<IColorPickerProps> = () => {
           >
             Open Eyedropper
           </button>
+          {openEyeDropper ? (
+            <EyeDropper onChange={handleChangeColor} once={false} />
+          ) : null}
         </div>
 
         <div className={styles.formSection}>
@@ -54,9 +59,6 @@ const ColorPicker: React.FC<IColorPickerProps> = () => {
           <>
             <img src={image} alt="Working image" />
             <div style={{ backgroundImage: `url(${image})` }}></div>
-            {openEyeDropper ? (
-              <EyeDropper onChange={handleChangeColor} />
-            ) : null}
           </>
         ) : (
           <svg
