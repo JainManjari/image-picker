@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import styles from "./ColorPicker.module.css";
+import { EyeDropper, OnChangeEyedrop } from "react-eyedrop";
 
 export interface IColorPickerProps {}
 
 const ColorPicker: React.FC<IColorPickerProps> = () => {
   const [color, setColor] = useState<string>("#5524e7");
+  const [openEyeDropper, setOpenEyeDropper] = useState<boolean>(false);
   const [image, setImage] = useState<string | null>(null);
 
-  const openEyeDropper = async () => {};
-
   const handleFileInput = (e: any) => {};
+
+  const handleChangeColor = ({ rgb, hex }: OnChangeEyedrop) => {
+    setColor(hex);
+  };
 
   const handleCopyColor = async () => {};
 
@@ -24,7 +28,12 @@ const ColorPicker: React.FC<IColorPickerProps> = () => {
 
         <div className={styles.formSection}>
           <p>2. Pick color </p>
-          <button className={styles.openPickerButton} onClick={openEyeDropper}>
+          <button
+            className={styles.openPickerButton}
+            onClick={() =>
+              image ? setOpenEyeDropper(true) : setOpenEyeDropper(false)
+            }
+          >
             Open Eyedropper
           </button>
         </div>
@@ -45,6 +54,9 @@ const ColorPicker: React.FC<IColorPickerProps> = () => {
           <>
             <img src={image} alt="Working image" />
             <div style={{ backgroundImage: `url(${image})` }}></div>
+            {openEyeDropper ? (
+              <EyeDropper onChange={handleChangeColor} />
+            ) : null}
           </>
         ) : (
           <svg
