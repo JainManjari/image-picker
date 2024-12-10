@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import styles from "./ColorPicker.module.css";
 import { EyeDropper, OnChangeEyedrop } from "react-eyedrop";
+import ReactImageMagnify from "react-image-magnify";
+import ReactSlick from "react-image-magnify";
+import ColorPickerGemini from "./ColorPickerGemini";
 
 export interface IColorPickerProps {}
 
@@ -39,7 +42,12 @@ const ColorPicker: React.FC<IColorPickerProps> = () => {
             Open Eyedropper
           </button>
           {openEyeDropper ? (
-            <EyeDropper onChange={handleChangeColor} once={false} />
+            <EyeDropper
+              onChange={handleChangeColor}
+              once={false}
+              pickRadius={3}
+              cursorActive="cursor"
+            />
           ) : null}
         </div>
 
@@ -57,8 +65,25 @@ const ColorPicker: React.FC<IColorPickerProps> = () => {
       <div className={styles.rightColumn}>
         {image ? (
           <>
-            <img src={image} alt="Working image" />
-            <div style={{ backgroundImage: `url(${image})` }}></div>
+            {/* <img src={image} alt="Working image" />
+            <div style={{ backgroundImage: `url(${image})` }}></div> */}
+            <div className={styles.imageContainer}>
+              <ReactImageMagnify 
+              {...{
+                smallImage: {
+                  alt: "Working image",
+                  isFluidWidth: true,
+                  src: image,
+                },
+                largeImage: {
+                  src: image,
+                  width: 750,
+                  height: 500,
+                },
+              }}
+            />
+              {/* <ColorPickerGemini imageUrl={image} /> */}
+            </div>
           </>
         ) : (
           <svg
